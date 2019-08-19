@@ -2,3 +2,9 @@
     display: block;
     margin-top: 10px;
 }
+
+/* Styling the super cool div that is conditional */
+.mycooldiv {
+    border: 1px solid blue;
+    margin-top: 25px;
+}
