@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Frame from './components/frame/frame';
+import AppRouter from './router';
 
 function App() {
   return (
-    <Frame />
+    <AppRouter />
   );
 }
 
