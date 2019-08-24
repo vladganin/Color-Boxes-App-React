@@ -49,7 +49,7 @@ class Calculator extends React.Component {
     render() {
         return (
             <div class='wrapper'>
-                <h1 className="title">Calculator</h1>
+                <h1 className="title">Calculator, broken at the moment, but being fixed</h1>
                 <h2 className="valuetitle">{this.state.currentvalue ? this.state.currentvalue : 'value'}</h2>
                 <GridSet>
                     <CalculatorButton onClick={() => this.handleClickValue(7)} displayvalue="7" />
