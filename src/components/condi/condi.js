@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './condi.css';
-import pic from './picture.jpg';
-import pic2 from './picture2.jpg';
 import pic3 from './picture3.jpg';
 import pic4 from './picture4.jpg';
 import Container from 'react-bootstrap/Container';
@@ -22,10 +20,10 @@ function Condi() {
         setIsShown(false)
     }
 
-    if (isShown == true) {
-        var cooldiv = <img src={pic3} alt="super cool picture" />;
-    } else if (isShown == false) {
-        var cooldiv = <img src={pic4} alt="super cool picture" />;
+    if (isShown === true) {
+        var cooldiv = <img src={pic3} alt="super cool" />;
+    } else if (isShown === false) {
+        cooldiv = <img src={pic4} alt="super cool" />;
     }
 
     return (

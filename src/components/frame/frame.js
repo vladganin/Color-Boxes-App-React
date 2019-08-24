@@ -10,6 +10,7 @@ function ColorBox(props) {
   )
 }
 
+
 class ColorChanger extends React.Component {
   constructor(props) {
     super(props);

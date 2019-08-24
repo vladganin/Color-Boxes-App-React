@@ -15,7 +15,7 @@ class People extends React.Component {
             let picture = data.results.map((pic) => {
                 return (
                     <div key={pic.results}>
-                        <img src={pic.picture.large} />
+                        <img src={pic.picture.large} alt="Human face front" />
                     </div>
                 )
             })
