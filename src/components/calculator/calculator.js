@@ -1,9 +1,15 @@
 import React from 'react';
 import './calculator.css';
 import Button from 'react-bootstrap/Button';
+import * as math from 'mathjs';
+
+
+
+/* Button SECONDARY component
+---------------------------------------------------------
+*/
 
 const CalculatorButton = (props) => {
-    let displayvalue = props.displayvalue;
     let buttonmod = props.styling;
     let styling = {
         'btn-lg': true,
@@ -12,11 +18,15 @@ const CalculatorButton = (props) => {
 
     return (
         <div>
-            <Button type="button" variant="light" className={styling} onClick={props.onClick}>{displayvalue}
+            <Button type="button" variant="light" className={styling} onClick={() => props.onClick(props.children)}>{props.children}
             </Button>
         </div >
     )
 }
+
+/* Grid SECONDARY component
+--------------------------------------------------------
+*/
 
 const GridSet = (props) => {
     return (
@@ -26,55 +36,70 @@ const GridSet = (props) => {
     )
 }
 
+
+/* Calculator MAIN component
+---------------------------------------------------------
+*/
+
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentvalue: []
+            currentvalue: '',
         };
-
-        this.handleClickValue = this.handleClickValue.bind(this);
-        this.handleSum = this.handleSum.bind(this);
     };
 
-    handleClickValue(num) {
-        this.setState({ currentvalue: this.state.currentvalue.concat(num) })
+    handleClickValue = value => {
+        this.setState({ currentvalue: this.state.currentvalue + value })
     };
 
-    handleSum() {
-        let newvalue = this.state.currentvalue + 2;
-        this.setState({ currentvalue: newvalue })
+    doCalculate = () => {
+        this.setState({ currentvalue: math.evaluate(this.state.currentvalue) });
     }
+
+    doMultiply = value => {
+        if (value === 'x') {
+            this.setState({ currentvalue: this.state.currentvalue + value.replace("x", "*") });
+        }
+    };
+
+    doDivide = value => {
+        if (value === ':') {
+            this.setState({ currentvalue: this.state.currentvalue + value.replace(":", "/") });
+        }
+    };
 
     render() {
         return (
-            <div class='wrapper'>
-                <h1 className="title">Calculator, broken at the moment, but being fixed</h1>
-                <h2 className="valuetitle">{this.state.currentvalue ? this.state.currentvalue : 'value'}</h2>
-                <GridSet>
-                    <CalculatorButton onClick={() => this.handleClickValue(7)} displayvalue="7" />
-                    <CalculatorButton onClick={() => this.handleClickValue(8)} displayvalue="8" />
-                    <CalculatorButton onClick={() => this.handleClickValue(9)} displayvalue="9" />
-                    <CalculatorButton styling="buttonmod" onClick={() => this.handleClickValue()} displayvalue=":" />
-                </GridSet>
-                <GridSet>
-                    <CalculatorButton onClick={() => this.handleClickValue(4)} displayvalue="4" />
-                    <CalculatorButton onClick={() => this.handleClickValue(5)} displayvalue="5" />
-                    <CalculatorButton onClick={() => this.handleClickValue(6)} displayvalue="6" />
-                    <CalculatorButton styling="buttonmod" onClick={() => this.handleClickValue()} displayvalue="x" />
-                </GridSet>
-                <GridSet>
-                    <CalculatorButton onClick={() => this.handleClickValue(1)} displayvalue="1" />
-                    <CalculatorButton onClick={() => this.handleClickValue(2)} displayvalue="2" />
-                    <CalculatorButton onClick={() => this.handleClickValue(3)} displayvalue="3" />
-                    <CalculatorButton styling="buttonmod" onClick={() => this.handleClickValue()} displayvalue="-" />
-                </GridSet>
-                <GridSet>
-                    <CalculatorButton onClick={() => this.handleClickValue(0)} displayvalue="0" />
-                    <CalculatorButton onClick={() => this.handleClickValue(1)} displayvalue="," />
-                    <CalculatorButton onClick={() => this.handleClickValue(1)} displayvalue="=" />
-                    <CalculatorButton styling="buttonmod" onClick={() => this.handleSum()} displayvalue="+" />
-                </GridSet>
+            <div class="app-wrapper">
+                <div class='wrapper'>
+                    <h1 className="title">Calculator</h1>
+                    <h2 className="valuetitle">{this.state.currentvalue}</h2>
+                    <GridSet>
+                        <CalculatorButton onClick={this.handleClickValue}>7</CalculatorButton>
+                        <CalculatorButton onClick={this.handleClickValue}>8</CalculatorButton>
+                        <CalculatorButton onClick={this.handleClickValue}>9</CalculatorButton>
+                        <CalculatorButton styling="buttonmod" onClick={this.doDivide}>:</CalculatorButton>
+                    </GridSet>
+                    <GridSet>
+                        <CalculatorButton onClick={this.handleClickValue}>4</CalculatorButton>
+                        <CalculatorButton onClick={this.handleClickValue}>5</CalculatorButton>
+                        <CalculatorButton onClick={this.handleClickValue}>6</CalculatorButton>
+                        <CalculatorButton styling="buttonmod" onClick={this.doMultiply}>x</CalculatorButton>
+                    </GridSet>
+                    <GridSet>
+                        <CalculatorButton onClick={this.handleClickValue}>1</CalculatorButton>
+                        <CalculatorButton onClick={this.handleClickValue}>2</CalculatorButton>
+                        <CalculatorButton onClick={this.handleClickValue}>3</CalculatorButton>
+                        <CalculatorButton styling="buttonmod" onClick={this.handleClickValue}>-</CalculatorButton>
+                    </GridSet>
+                    <GridSet>
+                        <CalculatorButton onClick={this.handleClickValue}>0</CalculatorButton>
+                        <CalculatorButton onClick={() => this.setState({ currentvalue: "" })}>C</CalculatorButton>
+                        <CalculatorButton onClick={() => this.doCalculate()}>=</CalculatorButton>
+                        <CalculatorButton styling="buttonmod" onClick={this.handleClickValue}>+</CalculatorButton>
+                    </GridSet>
+                </div>
             </div>
         )
     }
