@@ -4,6 +4,7 @@ import Frame from './components/frame/frame';
 import Weather from './components/weather/weather';
 import Condi from './components/condi/condi';
 import Calculator from './components/calculator/calculator';
+import Dragger from './components/dragger/dragger';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import './router.css'
@@ -26,12 +27,16 @@ function AppRouter() {
                         <Nav.Link>
                             <Link to="/calculator/" className="navstyle">Calculator</Link>
                         </Nav.Link>
+                        <Nav.Link>
+                            <Link to="/dragger/" className="navstyle">Dragger</Link>
+                        </Nav.Link>
                     </Nav>
                     <div className="routerstyle">
                         <Route path="/colorchanger/" component={Frame} />
                         <Route path="/people/" component={Weather} />
                         <Route path="/condi/" component={Condi} />
                         <Route path="/calculator/" component={Calculator} />
+                        <Route path="/dragger/" component={Dragger} />
                     </div>
                 </Router>
             </Navbar>
