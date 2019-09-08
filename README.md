@@ -1,7 +1,9 @@
 Hi!
 
-This is my first project with React. I want to start learning how props and state work.
-I will make a small App that does some fun stuff with colors and changes.
+This is my first project with React. I want to learn things.
+Live: https://react-first-app-ganin-poland.netlify.com/
+
+
 
 Cheers
 Vlad
